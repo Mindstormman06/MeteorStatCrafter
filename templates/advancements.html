@@ -30,23 +30,10 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Minecraft Server Stats</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}">MeteorCraft Stats</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </nav>
 
@@ -59,7 +46,7 @@
     <!-- Advancements Table -->
     <div class="container">
         <h2 class="text-center mb-4">Advancements</h2>
-        <table class="table table-striped table-hover">
+        <table class="table">
             <thead class="thead-dark">
                 <tr>
                     <th>Icon</th>
@@ -72,7 +59,7 @@
                 {% for advancement, data in advancements['multi_part_advancements'].items() %}
                 <tr>
                     <td>
-                        <img src="{{ url_for('static', filename='advancements/' + data.get('icon', 'default-icon.png')) }}" 
+                        <img src="{{ url_for('static', filename='advancements/' 'default-icon' + '.png') }}" 
                              alt="Icon" class="advancement-icon">
                     </td>
                     <td>
@@ -106,7 +93,7 @@
                 {% for advancement, data in advancements['other_advancements'].items() %}
                 <tr>
                     <td>
-                        <img src="{{ url_for('static', filename='advancements/' + data.get('icon', 'default-icon.png')) }}" 
+                        <img src="{{ url_for('static', filename='advancements/' 'default-icon' + '.png') }}" 
                              alt="Icon" class="advancement-icon">
                     </td>
                     <td>

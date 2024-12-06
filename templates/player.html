@@ -8,9 +8,19 @@
     <link rel="stylesheet" href="/static/css/stylesheet.css">
 </head>
 <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('index') }}">MeteorCraft Stats</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
     <div class="container mt-4">
         <!-- Back Button -->
-        <a href="{{ url_for('index') }}" class="btn btn-primary mb-3">Back to Player List</a>
+        <a href="{{ url_for('index') }}" class="btn btn-view-advancements">Back to Home Page</a>
 
         <h1>{{ player.username }}'s Profile</h1>
         <p>UUID: {{ player.uuid }}</p>
@@ -23,8 +33,9 @@
         <div class="row">
             <div class="col-md-6">
                 
-                
-                <div><a href="{{ url_for('player_advancements', uuid=player['uuid']) }}">TEMPORARY ADVANCEMENTS BUTTON</a></div>
+                <p></p>
+                <a href="{{ url_for('player_advancements', uuid=player['uuid']) }}" class="btn btn-view-advancements">View Advancements</a>
+                <p></p>
 
 
                 <div class="card">
@@ -102,9 +113,16 @@
 
             // Load the player's skin (make sure the skin file is named with the UUID)
             const skinUrl = "/static/skins/{{ player.uuid }}.png";
+            const capeUrl = "/static/capes/{{ player.uuid }}_cape.png"
             console.log("Skin URL:", skinUrl); // Check the URL being used
+            console.log("Cape URL:", capeUrl);
 
+
+            skinViewer.animation = new skinview3d.WalkingAnimation();
+            skinViewer.animation.speed = 0.2;
             skinViewer.loadSkin(skinUrl);
+            skinViewer.loadCape(capeUrl);
+
         </script>
     </div>
 
