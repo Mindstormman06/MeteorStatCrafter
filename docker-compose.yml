@@ -22,7 +22,7 @@ services:
         apt-get update &&
         apt-get install -y git python3-full &&
         ls ./StatCrafter ||
-        git clone https://github.com/Yeetoxic/StatCrafter.git &&
+        git clone https://github.com/Mindstormman06/MeteorStatCrafter.git &&
         apt-get install python3-pip -y &&
         python3 -m pip install -r /data/StatCrafter/requirements.txt --break-system-packages &&
         echo done &&
