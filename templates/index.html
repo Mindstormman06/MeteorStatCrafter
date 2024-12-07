@@ -31,11 +31,10 @@
 
                 if (data.players && data.players.length > 0) {
                     const playersHtml = data.players
-                    .map(player => {
-                        const ping = data.ping[player]; // Get the ping for the player
-                        return `<li class="list-group-item">${player} - Ping: ${ping || "N/A"} ms</li>`;
-                    })
-                    .join("");
+                        .map(player => {
+                            return `<li class="list-group-item">${player} - Connected!</li>`;
+                        })
+                        .join("");
                     playerBox.innerHTML = `<ul class="list-group">${playersHtml}</ul>`;
                 } else {
                     playerBox.innerHTML = "<p class='text-center'>No players online right now.</p>";

@@ -3,3 +3,4 @@ flask
 nbt
 mcstatus
 nbtlib
+flask-talisman

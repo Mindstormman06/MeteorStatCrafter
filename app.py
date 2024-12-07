@@ -10,8 +10,36 @@ from mcstatus import JavaServer
 import nbtlib
 import logging
 import socket
+from flask_talisman import Talisman
 
 app = Flask(__name__)
+csp = {
+    'default-src': [
+        "'self'",
+    ],
+    'style-src': [
+        "'self'",
+        "'unsafe-inline'",
+        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css', 
+        'https://fonts.googleapis.com',
+    ],
+    'script-src': [
+        "'self'",
+        "'unsafe-inline'",
+        'https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js',
+        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js'
+    ],
+    'font-src': [
+        "'self'",
+        'https://fonts.gstatic.com',
+    ],
+    'img-src': [
+        "'self'",
+        'data:', 
+    ],
+}
+
+Talisman(app, content_security_policy=csp)
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -31,7 +59,6 @@ logging.getLogger('werkzeug').setLevel(logging.ERROR)
 
 # Get the local IP address
 my_ip = socket.gethostbyname(socket.gethostname())
-
 
 def run_initial_processing():
     global stop_event
@@ -254,30 +281,6 @@ def online_players():
         }), 500
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @app.route('/')
 def index():
     level_dat_path = os.path.join("../world/", "level.dat")
@@ -337,8 +340,8 @@ if __name__ == "__main__":
     try:
         # Run the Flask app on the main thread
         print("Flask app starting...")
-        print(f"Server is running on http://127.0.0.1:5000 or http://{my_ip}:5000")
-        app.run(debug=False, host='0.0.0.0')
+        print(f"Server is running on http://127.0.0.1:443 or http://{my_ip}:443")
+        app.run(debug=False, host='0.0.0.0', port=443, ssl_context=('fullchain.pem', 'privkey.pem'))
     except KeyboardInterrupt:
         pass
         # Handle ^C (Ctrl+C) gracefully
